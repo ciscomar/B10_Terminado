@@ -1,0 +1,7 @@
+localhost
+b10
+root
+
+400
+123
+2000

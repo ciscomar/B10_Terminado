@@ -1,0 +1,6 @@
+localhost
+b10
+root
+
+400
+123

@@ -1,0 +1,8 @@
+localhost
+b10
+root
+toor
+700
+5210
+123
+0
