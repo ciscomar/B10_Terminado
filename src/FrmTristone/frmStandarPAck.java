@@ -19,6 +19,7 @@ import Model.StationModel;
 import com.google.gson.Gson;
 import com.rabbitmq.client.*;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
@@ -36,6 +37,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JProgressBar;
 
 
 /**
@@ -68,11 +70,13 @@ public class frmStandarPAck extends javax.swing.JFrame {
     DeliverCallback deliverCallback = null;
     
     
+    
     public frmStandarPAck()  {
-        
+            this.setIconImage(new ImageIcon(getClass().getResource("/img/icon_tristone.png")).getImage());
             initComponents();
-            
-            getContentPane().setBackground(Color.DARK_GRAY);
+            jProgressBar1.setVisible(false);
+            jProgressBar1.setIndeterminate(true);
+            getContentPane().setBackground(new Color(51,51,51));
             jtxtMessage.setEditable(false);
             jtxtSAPNumb.setEditable(false);
             jtxtStdarPack.setEditable(false);
@@ -80,11 +84,12 @@ public class frmStandarPAck extends javax.swing.JFrame {
             jButton2.setVisible(false);
             jButton1.setVisible(false);
             btnPrint.setVisible(false);
-            //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            this.setExtendedState(JFrame.MAXIMIZED_BOTH);
             //jlblPartNumb.setVisible(false);
             //jtxtPartNum.setVisible(false);
             //jlblSdarPack.setVisible(false);
             //jtxtStdarPack.setVisible(false);
+            jLabel6.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Tristone_White.png")).getImage().getScaledInstance(260, 150, Image.SCALE_SMOOTH)));
     }
     
     public void initialize(){
@@ -193,7 +198,7 @@ public class frmStandarPAck extends javax.swing.JFrame {
                 }
                 else{
                     jtxtMessage.setText("The File doesn't exist"); 
-                    jtxtMessage.setBackground(Color.red);
+                    jtxtMessage.setBackground(Color.decode("#FF1744")); 
                     jtxtMessage.setEditable(false);
                 }
         }
@@ -223,14 +228,16 @@ public class frmStandarPAck extends javax.swing.JFrame {
                 jtxtStdarPack.setText(contStdPack+"/"+_ProductsEntity.getPcks());
                 if(contStdPack > Integer.parseInt(_ProductsEntity.getPcks())){
                     jtxtMessage.setText("Can not be greater than the standard pack");
-                    jtxtMessage.setBackground(Color.red);                
+                    jtxtMessage.setBackground(Color.decode("#FF1744"));                 
                     jtxtMessage.setEditable(false);
                     jtxtPartNum.setEditable(true);
                     //ReseteBox();
                 }
                 if(contStdPack == Integer.parseInt(_ProductsEntity.getPcks())){
                     //JOptionPane.showConfirmDialog(null,"Excelente");
-                    jtxtPartNum.setEnabled(false);
+                    //jtxtPartNum.setEnabled(false);
+                    jtxtPartNum.setVisible(false);
+                    jProgressBar1.setVisible(true);
                     jtxtPartNum.setText("");
                     
                     SetSuccess();
@@ -252,7 +259,7 @@ public class frmStandarPAck extends javax.swing.JFrame {
                 }
             }else{
                  jtxtMessage.setText("Invalid Part Number");
-                 jtxtMessage.setBackground(Color.red);                
+                 jtxtMessage.setBackground(Color.decode("#FF1744"));                 
                  jtxtMessage.setEditable(false);
             }
         }
@@ -286,7 +293,7 @@ public class frmStandarPAck extends javax.swing.JFrame {
     
     private void SetSuccess(){
          jtxtMessage.setText("Success");
-         jtxtMessage.setBackground(Color.GREEN);                
+         jtxtMessage.setBackground(Color.decode("#00C853"));                
          jtxtMessage.setEditable(false);
     }
     
@@ -341,11 +348,11 @@ public class frmStandarPAck extends javax.swing.JFrame {
             e.printStackTrace();
             if(connRabbitMQ){
                 jtxtMessage.setText("RabbitMQ "+ e.getMessage());
-                jtxtMessage.setBackground(Color.red);                
+                jtxtMessage.setBackground(Color.decode("#FF1744"));                 
                 jtxtMessage.setEditable(false);
             } else if(connMySQL){
                 jtxtMessage.setText("MySQL "+ e.getMessage());
-                jtxtMessage.setBackground(Color.red);                
+                jtxtMessage.setBackground(Color.decode("#FF1744"));                 
                 jtxtMessage.setEditable(false);
             }                
         }
@@ -399,11 +406,11 @@ public class frmStandarPAck extends javax.swing.JFrame {
         }catch(Exception e){
             if(connRabbitMQ){
                 jtxtMessage.setText("RabbitMQ "+ e.getMessage());
-                jtxtMessage.setBackground(Color.red);                
+                jtxtMessage.setBackground(Color.decode("#FF1744"));                
                 jtxtMessage.setEditable(false);
             } else if(connMySQL){
                 jtxtMessage.setText("MySQL "+ e.getMessage());
-                jtxtMessage.setBackground(Color.red);                
+                jtxtMessage.setBackground(Color.decode("#FF1744"));                 
                 jtxtMessage.setEditable(false);
             }                
         }finally{
@@ -547,11 +554,11 @@ public class frmStandarPAck extends javax.swing.JFrame {
         }catch(Exception e){
             if(connRabbitMQ){
                 jtxtMessage.setText("RabbitMQ "+ e.getMessage());
-                jtxtMessage.setBackground(Color.red);                
+                jtxtMessage.setBackground(Color.decode("#FF1744"));                
                 jtxtMessage.setEditable(false);
             } else if(connMySQL){
                 jtxtMessage.setText("MySQL "+ e.getMessage());
-                jtxtMessage.setBackground(Color.red);                
+                jtxtMessage.setBackground(Color.decode("#FF1744"));                
                 jtxtMessage.setEditable(false);
             }                
         }finally{
@@ -670,7 +677,7 @@ public class frmStandarPAck extends javax.swing.JFrame {
                 }
                 else{
                     jtxtMessage.setText("The File doesn't exist"); 
-                    jtxtMessage.setBackground(Color.red);
+                    jtxtMessage.setBackground(Color.decode("#FF1744")); 
                     jtxtMessage.setEditable(false);
                 }
                 
@@ -745,7 +752,7 @@ public class frmStandarPAck extends javax.swing.JFrame {
                 }
                 else{
                     jtxtMessage.setText("The File doesn't exist"); 
-                    jtxtMessage.setBackground(Color.red);
+                    jtxtMessage.setBackground(Color.decode("#FF1744")); 
                     jtxtMessage.setEditable(false);
                 }
                 
@@ -888,8 +895,8 @@ public class frmStandarPAck extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel6 = new javax.swing.JLabel();
-        jtxtSAPNumb = new javax.swing.JTextField();
         jtxtPartNum = new javax.swing.JTextField();
+        jtxtSAPNumb = new javax.swing.JTextField();
         jtxtStdarPack = new javax.swing.JTextField();
         lblSAPNum = new javax.swing.JLabel();
         jlblPartNumb = new javax.swing.JLabel();
@@ -906,20 +913,30 @@ public class frmStandarPAck extends javax.swing.JFrame {
         btnPrint = new javax.swing.JButton();
         jlblEmpaque = new javax.swing.JLabel();
         jlblmagen = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
+        jSeparator7 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImages(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Tristone.png"))); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 12, 350, 212));
 
-        jtxtSAPNumb.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jtxtSAPNumb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtxtSAPNumb.setEnabled(false);
-
-        jtxtPartNum.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jtxtPartNum.setBackground(new java.awt.Color(51, 51, 51));
+        jtxtPartNum.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jtxtPartNum.setForeground(new java.awt.Color(255, 255, 255));
         jtxtPartNum.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtPartNum.setBorder(null);
+        jtxtPartNum.setOpaque(false);
         jtxtPartNum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxtPartNumActionPerformed(evt);
@@ -930,49 +947,83 @@ public class frmStandarPAck extends javax.swing.JFrame {
                 jtxtPartNumKeyPressed(evt);
             }
         });
+        getContentPane().add(jtxtPartNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, 260, -1));
 
-        jtxtStdarPack.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jtxtSAPNumb.setBackground(new java.awt.Color(51, 51, 51));
+        jtxtSAPNumb.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jtxtSAPNumb.setForeground(new java.awt.Color(255, 255, 255));
+        jtxtSAPNumb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtSAPNumb.setBorder(null);
+        jtxtSAPNumb.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
+        jtxtSAPNumb.setDisabledTextColor(new java.awt.Color(153, 153, 153));
+        jtxtSAPNumb.setEnabled(false);
+        jtxtSAPNumb.setOpaque(false);
+        jtxtSAPNumb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtSAPNumbActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jtxtSAPNumb, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, 260, 30));
+
+        jtxtStdarPack.setBackground(new java.awt.Color(51, 51, 51));
+        jtxtStdarPack.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jtxtStdarPack.setForeground(new java.awt.Color(255, 255, 255));
         jtxtStdarPack.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtStdarPack.setBorder(null);
+        jtxtStdarPack.setOpaque(false);
+        getContentPane().add(jtxtStdarPack, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 250, 260, -1));
 
-        lblSAPNum.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblSAPNum.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         lblSAPNum.setForeground(new java.awt.Color(255, 255, 255));
         lblSAPNum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSAPNum.setText("SAP Number");
+        getContentPane().add(lblSAPNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(498, 20, 266, 24));
 
-        jlblPartNumb.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jlblPartNumb.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jlblPartNumb.setForeground(new java.awt.Color(255, 255, 255));
         jlblPartNumb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblPartNumb.setText("Scan Part Number");
+        getContentPane().add(jlblPartNumb, new org.netbeans.lib.awtextra.AbsoluteConstraints(498, 152, 266, -1));
 
-        jlblSdarPack.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jlblSdarPack.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jlblSdarPack.setForeground(new java.awt.Color(255, 255, 255));
         jlblSdarPack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblSdarPack.setText("Standard Pack");
+        getContentPane().add(jlblSdarPack, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 266, -1));
 
-        jlblEmployeeName.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jlblEmployeeName.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jlblEmployeeName.setForeground(new java.awt.Color(255, 255, 255));
-        jlblEmployeeName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlblEmployeeName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlblEmployeeName.setText("Employee Name:");
         jlblEmployeeName.setName("jlblEmployee"); // NOI18N
+        getContentPane().add(jlblEmployeeName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 470, -1));
 
-        jlblEmployeeNumb.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jlblEmployeeNumb.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jlblEmployeeNumb.setForeground(new java.awt.Color(255, 255, 255));
-        jlblEmployeeNumb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlblEmployeeNumb.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jlblEmployeeNumb.setText("Employee Number:");
+        jlblEmployeeNumb.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jlblEmployeeNumb.setName("jlblEmployee"); // NOI18N
+        getContentPane().add(jlblEmployeeNumb, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 470, -1));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Employee Name:");
         jLabel1.setName(""); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 170, 19));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Employee ID:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 171, -1));
 
-        jtxtMessage.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jtxtMessage.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jtxtMessage.setForeground(new java.awt.Color(255, 255, 255));
         jtxtMessage.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(jtxtMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 800, 31));
 
+        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 51, 102));
         jButton1.setText("Consumer");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -989,17 +1040,27 @@ public class frmStandarPAck extends javax.swing.JFrame {
                 jButton1KeyPressed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 100, -1));
 
+        jButton2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 51, 102));
         jButton2.setText("Send");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 100, -1));
 
-        jtxtPartNumCopy.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jtxtPartNumCopy.setBackground(new java.awt.Color(51, 51, 51));
+        jtxtPartNumCopy.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jtxtPartNumCopy.setForeground(new java.awt.Color(255, 255, 255));
         jtxtPartNumCopy.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtPartNumCopy.setBorder(null);
+        jtxtPartNumCopy.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
+        jtxtPartNumCopy.setDisabledTextColor(new java.awt.Color(153, 153, 153));
         jtxtPartNumCopy.setEnabled(false);
+        jtxtPartNumCopy.setOpaque(false);
         jtxtPartNumCopy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxtPartNumCopyActionPerformed(evt);
@@ -1010,13 +1071,16 @@ public class frmStandarPAck extends javax.swing.JFrame {
                 jtxtPartNumCopyKeyPressed(evt);
             }
         });
+        getContentPane().add(jtxtPartNumCopy, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 120, 260, 30));
 
-        jlblPartNumb1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jlblPartNumb1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jlblPartNumb1.setForeground(new java.awt.Color(255, 255, 255));
         jlblPartNumb1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblPartNumb1.setText("Part Number");
+        getContentPane().add(jlblPartNumb1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 86, 182, 24));
 
-        btnPrint.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnPrint.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        btnPrint.setForeground(new java.awt.Color(255, 51, 102));
         btnPrint.setText("Print");
         btnPrint.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1033,111 +1097,38 @@ public class frmStandarPAck extends javax.swing.JFrame {
                 btnPrintKeyPressed(evt);
             }
         });
+        getContentPane().add(btnPrint, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 100, -1));
+        btnPrint.getAccessibleContext().setAccessibleName("btnPrint");
 
-        jlblEmpaque.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jlblEmpaque.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jlblEmpaque.setForeground(new java.awt.Color(255, 255, 255));
         jlblEmpaque.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblEmpaque.setText("Empaque");
+        getContentPane().add(jlblEmpaque, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 276, -1));
+        getContentPane().add(jlblmagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(611, 317, 82, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jtxtMessage)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jlblEmployeeName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlblEmployeeNumb, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(21, 21, 21)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtxtStdarPack)
-                            .addComponent(jlblPartNumb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblSAPNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlblSdarPack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addComponent(jlblPartNumb1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(42, 42, 42))
-                            .addComponent(jtxtPartNumCopy)
-                            .addComponent(jtxtPartNum)
-                            .addComponent(jtxtSAPNumb))
-                        .addGap(20, 20, 20))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlblEmpaque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
-                        .addComponent(jlblmagen, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(91, 91, 91))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(lblSAPNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtSAPNumb)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlblPartNumb1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtPartNumCopy)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlblPartNumb, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtxtPartNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlblSdarPack)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtxtStdarPack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jlblEmpaque)
-                        .addGap(12, 12, 12)
-                        .addComponent(jlblmagen, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlblEmployeeName)
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jlblEmployeeNumb)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)))
-                .addComponent(jtxtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 470, 10));
 
-        btnPrint.getAccessibleContext().setAccessibleName("btnPrint");
+        jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 470, 10));
+
+        jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 280, 260, 20));
+
+        jSeparator6.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, 260, 20));
+
+        jSeparator7.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, 260, 20));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_barcode_reader.png"))); // NOI18N
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, -1, -1));
+
+        jProgressBar1.setMaximum(10);
+        jProgressBar1.setToolTipText("");
+        jProgressBar1.setValue(10);
+        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, 200, 20));
 
         pack();
         setLocationRelativeTo(null);
@@ -1219,6 +1210,10 @@ public class frmStandarPAck extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPrintActionPerformed
 
+    private void jtxtSAPNumbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtSAPNumbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtSAPNumbActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1257,6 +1252,13 @@ public class frmStandarPAck extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
     private javax.swing.JLabel jlblEmpaque;
     private javax.swing.JLabel jlblEmployeeName;
     private javax.swing.JLabel jlblEmployeeNumb;

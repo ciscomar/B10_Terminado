@@ -17,6 +17,7 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.time.LocalDateTime;
@@ -28,6 +29,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -51,10 +53,11 @@ public class frmSerialNumber extends javax.swing.JFrame {
     
     public frmSerialNumber() {
         initComponents();
-        
-        getContentPane().setBackground(Color.DARK_GRAY);
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/icon_tristone.png")).getImage());
+        getContentPane().setBackground(new Color(51,51,51));
         jtxtMessage.setEditable(false);
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        jLabel1.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Tristone_White.png")).getImage().getScaledInstance(260, 150, Image.SCALE_SMOOTH)));
     }
     
     public void initialize(){
@@ -80,7 +83,7 @@ public class frmSerialNumber extends javax.swing.JFrame {
         if(serialNumber==0){
             jlblSerialNumber.setText("Error");
              jtxtMessage.setText("Error");
-            jtxtMessage.setBackground(Color.red);
+            jtxtMessage.setBackground(Color.decode("#FF1744")); 
             jtxtMessage.setEditable(false);
             _serialNumber = serialNumber;
         }else{
@@ -202,7 +205,7 @@ public class frmSerialNumber extends javax.swing.JFrame {
             
             validateSN = false;
             jtxtMessage.setText("Invalid Serial Number");
-            jtxtMessage.setBackground(Color.red);
+            jtxtMessage.setBackground(Color.decode("#FF1744")); 
             jtxtMessage.setEditable(false);
             jtxtSerialNumber.setText("");
             ReseteBox();
@@ -255,11 +258,11 @@ public class frmSerialNumber extends javax.swing.JFrame {
             e.printStackTrace();
             if(connRabbitMQ){
                 jtxtMessage.setText("RabbitMQ "+ e.getMessage());
-                jtxtMessage.setBackground(Color.red);                
+                jtxtMessage.setBackground(Color.decode("#FF1744"));                 
                 jtxtMessage.setEditable(false);
             } else if(connMySQL){
                 jtxtMessage.setText("MySQL "+ e.getMessage());
-                jtxtMessage.setBackground(Color.red);                
+                jtxtMessage.setBackground(Color.decode("#FF1744"));                
                 jtxtMessage.setEditable(false);
             }                
         }
@@ -305,12 +308,12 @@ public class frmSerialNumber extends javax.swing.JFrame {
         }catch(Exception e){
             if(connRabbitMQ){
                 jtxtMessage.setText("RabbitMQ "+ e.getMessage());
-                jtxtMessage.setBackground(Color.red);                
+                jtxtMessage.setBackground(Color.decode("#FF1744"));                 
                 jtxtMessage.setEditable(false);
                 ReseteBox();
             } else if(connMySQL){
                 jtxtMessage.setText("MySQL "+ e.getMessage());
-                jtxtMessage.setBackground(Color.red);                
+                jtxtMessage.setBackground(Color.decode("#FF1744"));                 
                 jtxtMessage.setEditable(false);
                 ReseteBox();
             }                
@@ -392,7 +395,7 @@ public class frmSerialNumber extends javax.swing.JFrame {
                 }
                 else{
                     jtxtMessage.setText("The File doesn't exist"); 
-                    jtxtMessage.setBackground(Color.red);
+                    jtxtMessage.setBackground(Color.decode("#FF1744")); 
                     jtxtMessage.setEditable(false);
                 }
         }
@@ -422,117 +425,87 @@ public class frmSerialNumber extends javax.swing.JFrame {
         jtxtSerialNumber = new javax.swing.JTextField();
         jlblSerialNumber = new javax.swing.JLabel();
         jtxtMessage = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(750, 421));
+        setPreferredSize(new java.awt.Dimension(750, 421));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Tristone.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 260, 150));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Employee ID:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 279, 171, -1));
 
-        jlblEmployeeName.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jlblEmployeeName.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jlblEmployeeName.setForeground(new java.awt.Color(255, 255, 255));
         jlblEmployeeName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblEmployeeName.setText("Employee Name:");
         jlblEmployeeName.setName("jlblEmployee"); // NOI18N
+        getContentPane().add(jlblEmployeeName, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 254, 331, -1));
 
-        jlblEmployeeNumb.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jlblEmployeeNumb.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jlblEmployeeNumb.setForeground(new java.awt.Color(255, 255, 255));
         jlblEmployeeNumb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblEmployeeNumb.setText("Employee Number:");
         jlblEmployeeNumb.setName("jlblEmployee"); // NOI18N
+        getContentPane().add(jlblEmployeeNumb, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 307, 349, -1));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Employee Name:");
         jLabel4.setName(""); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 229, 170, 19));
 
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Serial Number:");
         jLabel5.setName(""); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, 141, -1));
 
-        jtxtSerialNumber.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jtxtSerialNumber.setBackground(new java.awt.Color(51, 51, 51));
+        jtxtSerialNumber.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jtxtSerialNumber.setForeground(new java.awt.Color(255, 255, 255));
         jtxtSerialNumber.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtSerialNumber.setBorder(null);
+        jtxtSerialNumber.setOpaque(false);
         jtxtSerialNumber.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtxtSerialNumberKeyPressed(evt);
             }
         });
+        getContentPane().add(jtxtSerialNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 220, 30));
 
-        jlblSerialNumber.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jlblSerialNumber.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jlblSerialNumber.setForeground(new java.awt.Color(255, 255, 255));
         jlblSerialNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlblSerialNumber.setText("Serial Number");
         jlblSerialNumber.setName(""); // NOI18N
+        getContentPane().add(jlblSerialNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, 143, -1));
 
-        jtxtMessage.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jtxtMessage.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jtxtMessage.setForeground(new java.awt.Color(255, 255, 255));
         jtxtMessage.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(jtxtMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 800, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jlblEmployeeNumb, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(37, 37, 37)
-                            .addComponent(jlblEmployeeName, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtxtSerialNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                        .addGap(39, 39, 39))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jlblSerialNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
-                        .addGap(38, 38, 38)))
-                .addGap(102, 102, 102))
-            .addComponent(jtxtMessage)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtSerialNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlblSerialNumber))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlblEmployeeName)
-                .addGap(3, 3, 3)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlblEmployeeNumb)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(jtxtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, 220, 10));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, -1, -1));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_barcode_reader.png"))); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -569,13 +542,13 @@ public class frmSerialNumber extends javax.swing.JFrame {
                     }
                     else{
                         jtxtMessage.setText("Invalid Serial Number");
-                        jtxtMessage.setBackground(Color.red);
+                        jtxtMessage.setBackground(Color.decode("#FF1744")); 
                         jtxtMessage.setEditable(false);
                         ReseteBox();
                     }
                 }else{
                     jtxtMessage.setText("Invalid Serial Number");
-                    jtxtMessage.setBackground(Color.red);
+                    jtxtMessage.setBackground(Color.decode("#FF1744")); 
                     jtxtMessage.setEditable(false);
                     ReseteBox();
                 }           
@@ -625,9 +598,12 @@ public class frmSerialNumber extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel jlblEmployeeName;
     private javax.swing.JLabel jlblEmployeeNumb;
     private javax.swing.JLabel jlblSerialNumber;

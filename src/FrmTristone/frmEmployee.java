@@ -7,6 +7,8 @@ package FrmTristone;
 
 import Model.EmployeesModel;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,9 +17,11 @@ import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+
 
 
 
@@ -31,17 +35,18 @@ public class frmEmployee extends javax.swing.JFrame {
      * Creates new form frmEmployee
      */
     
-    
     public frmEmployee()  {
         initComponents();
-        
-        getContentPane().setBackground(Color.DARK_GRAY);
+
+       
+        this.setIconImage(new ImageIcon(getClass().getResource("/img/icon_tristone.png")).getImage());
+        getContentPane().setBackground(new Color(51,51,51));
          //this.setUndecorated(true);
         jtxtMessage.setEditable(false);
         jbtnSendEmployee.setVisible(false);
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
             //jLabel2.setBackground(Color.white);
-        
+        jLabel1.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Tristone_White.png")).getImage().getScaledInstance(260, 150, Image.SCALE_SMOOTH)));
     }
 
     /**
@@ -57,26 +62,32 @@ public class frmEmployee extends javax.swing.JFrame {
         jtxtEmployeeNumber = new javax.swing.JTextField();
         jbtnSendEmployee = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        label1 = new java.awt.Label();
-        label2 = new java.awt.Label();
         jLabel2 = new javax.swing.JLabel();
         jtxtMessage = new javax.swing.JTextField();
-        jlblSettings = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setForeground(new java.awt.Color(0, 0, 0));
-        setIconImages(null);
-        setMaximumSize(new java.awt.Dimension(682, 334));
+        setMaximumSize(null);
+        setSize(new java.awt.Dimension(0, 0));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jtxtEmployeeNumber.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jtxtEmployeeNumber.setBackground(new java.awt.Color(51, 51, 51));
+        jtxtEmployeeNumber.setFont(new java.awt.Font("Segoe UI Light", 1, 18)); // NOI18N
+        jtxtEmployeeNumber.setForeground(new java.awt.Color(255, 255, 255));
         jtxtEmployeeNumber.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtEmployeeNumber.setBorder(null);
+        jtxtEmployeeNumber.setOpaque(false);
         jtxtEmployeeNumber.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtxtEmployeeNumberKeyPressed(evt);
             }
         });
+        getContentPane().add(jtxtEmployeeNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 220, 30));
 
         jbtnSendEmployee.setText("Submint");
         jbtnSendEmployee.addActionListener(new java.awt.event.ActionListener() {
@@ -84,74 +95,51 @@ public class frmEmployee extends javax.swing.JFrame {
                 jbtnSendEmployeeActionPerformed(evt);
             }
         });
+        getContentPane().add(jbtnSendEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, -1, -1));
+        jbtnSendEmployee.getAccessibleContext().setAccessibleName("btnSubmint");
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Tristone.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 260, 150));
 
-        label1.setText("label1");
-
-        label2.setText("label2");
-
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Employee Number");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 231, -1));
 
-        jtxtMessage.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jtxtMessage.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jtxtMessage.setForeground(new java.awt.Color(255, 255, 255));
         jtxtMessage.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        jlblSettings.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlblSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Setting.png"))); // NOI18N
-        jlblSettings.setName("jlblEmployee"); // NOI18N
-        jlblSettings.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlblSettingsMouseClicked(evt);
+        jtxtMessage.setBorder(null);
+        jtxtMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtMessageActionPerformed(evt);
             }
         });
+        getContentPane().add(jtxtMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 780, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnSendEmployee, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jtxtEmployeeNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(91, 91, 91))
-            .addComponent(jtxtMessage)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jlblSettings)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                        .addComponent(jlblSettings)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtEmployeeNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtnSendEmployee)
-                        .addGap(72, 72, 72)))
-                .addComponent(jtxtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 220, 20));
 
-        jbtnSendEmployee.getAccessibleContext().setAccessibleName("btnSubmint");
+        jButton1.setBackground(new java.awt.Color(51, 51, 51));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/automatic_52px.png"))); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/automatic_50px_colored.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 60, 60));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_barcode_reader.png"))); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, -1, -1));
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnSendEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSendEmployeeActionPerformed
@@ -196,7 +184,7 @@ public class frmEmployee extends javax.swing.JFrame {
             ExistEmployee();
     }//GEN-LAST:event_jtxtEmployeeNumberKeyPressed
 
-    private void jlblSettingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblSettingsMouseClicked
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //String innerPassword = JOptionPane.showInputDialog(null,"Set Password",);
         String innerPassword="";
@@ -205,7 +193,7 @@ public class frmEmployee extends javax.swing.JFrame {
         Object[] obj = {"Please enter the password:\n\n", passwordField};
         Object stringArray[] = {"OK","Cancel"};
         if (JOptionPane.showOptionDialog(null, obj, "Need password",
-        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, stringArray, obj) == JOptionPane.YES_OPTION)
+        JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, stringArray, obj) == JOptionPane.YES_OPTION)
         innerPassword = new String(passwordField.getPassword());
         
         
@@ -219,12 +207,15 @@ public class frmEmployee extends javax.swing.JFrame {
         else{
                 //jtxtMessage.setVisible(true);
                 jtxtMessage.setText("Invalid Password");
-                jtxtMessage.setBackground(Color.red);                
+                jtxtMessage.setBackground(Color.decode("#FF1744"));                
                 jtxtMessage.setEditable(false);
                 ReseteBox();
             }
-            
-    }//GEN-LAST:event_jlblSettingsMouseClicked
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jtxtMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtMessageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtMessageActionPerformed
 
     
      private boolean GetInnerPassword(String innerPassword ){
@@ -379,13 +370,13 @@ public class frmEmployee extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbtnSendEmployee;
-    private javax.swing.JLabel jlblSettings;
     private javax.swing.JTextField jtxtEmployeeNumber;
     private javax.swing.JTextField jtxtMessage;
-    private java.awt.Label label1;
-    private java.awt.Label label2;
     // End of variables declaration//GEN-END:variables
 }
